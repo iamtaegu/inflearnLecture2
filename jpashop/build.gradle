@@ -4,25 +4,6 @@ plugins {
 	id 'java'
 }
 
-/**
- * npm install start
- * */
-node {
-	version = '17.0.2'
-	download = true
-	nodeModulesDir = file("${projectDir}/src/main/resources/static/frontend")
-}
-
-task copyFrontLib(type: Copy) {
-	from "${projectDir}/src/main/resources/static/frontend"
-	into "${projectDir}/build/resources/main/static/frontend."
-}
-
-copyFrontLib.dependsOn npmInstall
-compileJava.dependsOn copyFrontLib
-/**
- * npm install end
- * */
 
 group = 'jpabook'
 version = '0.0.1-SNAPSHOT'
@@ -55,6 +36,7 @@ dependencies {
 	testImplementation("org.junit.vintage:junit-vintage-engine") {
 	exclude group: "org.hamcrest", module: "hamcrest-core"
 	}
+
 }
 
 test {
