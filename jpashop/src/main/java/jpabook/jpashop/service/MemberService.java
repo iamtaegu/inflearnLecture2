@@ -58,4 +58,10 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id); // 영속 상태
+        member.setName(name); // 영속 상태 엔티티 값이 변경돼어 Transactional에 의해 DB반영
+    }
 }
