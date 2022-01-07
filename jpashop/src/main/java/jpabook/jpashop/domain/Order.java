@@ -24,6 +24,8 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    //fetch=LAZY이기 때문에 Order 객체 생성할 때 가져오진 않음
+    //member값을 Order객체에서 건들 때 db에서 가져옴
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     //Member - Order 사이에서 연관 관계에 주인
