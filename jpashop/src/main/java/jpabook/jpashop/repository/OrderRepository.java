@@ -78,4 +78,30 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                // JPA에서 distinct 키워드를 sql에 distinct 기능
+                // + Order.order_id가 중복되면 제거해줌
+                "select distinct o from Order o" +
+                        " join fetch o.member m " +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList();
+                // fetch; applying in memory!
+                /*.setFirstResult(1)
+                .setMaxResults(100)
+                .getResultList();*/
+
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m " +
+                        " join fetch o.delivery d ", Order.class
+                ).setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
