@@ -1,11 +1,9 @@
 package jpabook.jpashop.service;
 
-import com.sun.javadoc.MemberDoc;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
-import lombok.AllArgsConstructor;
+import jpabook.jpashop.repository.MemberRepositoryOld;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,12 +54,12 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
     @Transactional
     public void update(Long id, String name) {
-        Member member = memberRepository.findOne(id); // 영속 상태
+        Member member = memberRepository.findById(id).get(); // 영속 상태
         member.setName(name); // 영속 상태 엔티티 값이 변경돼어 Transactional에 의해 DB반영
     }
 }

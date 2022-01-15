@@ -33,7 +33,7 @@ public class OrderApiController {
         List<Order> all = orderRepository.findAllByCriteria(new OrderSearch());
         //iter + tab
         for (Order order : all) {
-            order.getMember().getName();
+            order.getMember().getName(); // db에서 Member 엔티티를 아직 가져오지 않았고, proxy 객체인 상태
             order.getDelivery().getAddress();
             List<OrderItem> orderItems = order.getOrderItems();
             orderItems.stream().forEach(o -> o.getItem().getName());
@@ -112,7 +112,7 @@ public class OrderApiController {
             orderItems = order.getOrderItems().stream()
                     .map(OrderItemDto::new)
                     .collect(toList());
-            
+
             // 엔티티가 노출 되는 이슈
 //            orderItems = order.getOrderItems();
 //            orderItems.stream().forEach(o -> o.getItem().getName());
