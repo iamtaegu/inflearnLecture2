@@ -1,6 +1,8 @@
 package jpabook.jpashop.repository;
 
-import jpabook.jpashop.domain.Member;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jpabook.jpashop.domain.*;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAll(OrderSearch orderSearch) {
+    /*public List<Order> findAll(OrderSearch orderSearch) {
 
         return em.createQuery("select o from Order o join o.member m" +
                 " where o.status = :status " +
@@ -35,7 +37,7 @@ public class OrderRepository {
                 .setParameter("status", orderSearch.getOrderStatus())
                 .setParameter("name", orderSearch.getMemberName())
                 .getResultList();
-    }
+    }*/
 
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -104,4 +106,40 @@ public class OrderRepository {
                 .setMaxResults(limit)
                 .getResultList();
     }
+
+    //queryDSL
+    //아래 코드는 JPQL과 형태가 유사할 뿐만 아니라
+    //자바 코드이기 때문에 컴파일 시점에 오류가 전부 발견됨
+    public List<Order> findAll(OrderSearch orderSearch) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QOrder order = QOrder.order;
+        QMember member = QMember.member;
+
+        return query
+                .select(order)
+                .from(order)
+                .join(order.member, member)
+                //동적쿼리
+                .where(statusEq(orderSearch.getOrderStatus()), nameLike(orderSearch.getMemberName()))
+                //정적쿼리
+                //.where(order.status.eq(orderSearch.getOrderStatus()), member.name.like(orderSearch.getMemberName()))
+                .limit(1000)
+                .fetch();
+    }
+
+    private BooleanExpression nameLike(String memberName) {
+        if (!StringUtils.hasText(memberName)) {
+            return null;
+        }
+        return QMember.member.name.like(memberName);
+    }
+
+    private BooleanExpression statusEq(OrderStatus statusCond) {
+        if (statusCond == null) {
+            return null;
+        }
+
+        return QOrder.order.status.eq(statusCond);
+    }
+
 }
