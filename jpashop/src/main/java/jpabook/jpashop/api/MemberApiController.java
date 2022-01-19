@@ -24,6 +24,17 @@ public class MemberApiController {
         return memberService.findMembers();
     }
 
+    @GetMapping("/api/v1.5/members")
+    public List<MemberDto> membersV1_5() {
+        List<Member> findMembers = memberService.findMembers();
+
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        return collect;
+    }
+
     @GetMapping("/api/v2/members")
     public Result memberV2() {
         List<Member> findmembers = memberService.findMembers();
