@@ -62,4 +62,5 @@ public class MemberService {
         Member member = memberRepository.findById(id).get(); // 영속 상태
         member.setName(name); // 영속 상태 엔티티 값이 변경돼어 Transactional에 의해 DB반영
     }
+
 }
