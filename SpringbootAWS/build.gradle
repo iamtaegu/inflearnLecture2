@@ -37,6 +37,9 @@ dependencies {
     //스프링 시큐리티 설정
     implementation ('org.springframework.boot:spring-boot-starter-oauth2-client')
 
+    //DB를 세션 저장소로 사용
+    implementation ('org.springframework.session:spring-session-jdbc')
+
     //implementation 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     compileOnly 'org.projectlombok:lombok'
