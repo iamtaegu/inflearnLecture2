@@ -21,9 +21,13 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+
+
+
 group 'com.jojoldu.book'
 version '1-0-SNAPSHOT'
 sourceCompatibility = 1.8
+//sourceCompatibility = 11
 
 
 repositories {
@@ -32,19 +36,17 @@ repositories {
 
 dependencies {
     implementation ('org.springframework.boot:spring-boot-starter-web')
+    implementation ('org.projectlombok:lombok')
     implementation ('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation ('org.springframework.boot:spring-boot-starter-mustache')
+    implementation ('com.h2database:h2')
     //스프링 시큐리티 설정
     implementation ('org.springframework.boot:spring-boot-starter-oauth2-client')
-
     //DB를 세션 저장소로 사용
     implementation ('org.springframework.session:spring-session-jdbc')
 
-    //implementation 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation ("org.mariadb.jdbc:mariadb-java-client")
 
     testImplementation ('org.springframework.boot:spring-boot-starter-test')
-
+    testImplementation ("org.springframework.security:spring-security-test")
 }

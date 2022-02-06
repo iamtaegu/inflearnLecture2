@@ -25,13 +25,15 @@ public class IndexController {
     * @LoginUser를 사용해 세션 정보를 가져올 수 있다
     * */
     public String index (Model model, @LoginUser SessionUser user) {
-        System.out.println(">>>>>>>>>>> 1 <<<<<<<<<<");
         model.addAttribute("posts", postsService.findAllDesc());
-        System.out.println(">>>>>>>>>>> 2 <<<<<<<<<<");
+
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            System.out.println("user is not null userName = " + user.getName());
+        } else {
+            System.out.println("user is null");
         }
-        System.out.println(">>>>>>>>>>> 3 <<<<<<<<<<");
+
         return "index";
     }
 
