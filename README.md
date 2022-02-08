@@ -1,6 +1,6 @@
 [2022-02-08] 무중단 서비스를 위한 AWS 서버 구성 START 
 
-*[EC2 서버구성]*
+**[EC2 서버구성]**
 1. EIP할당 - 고정IP 할당
 		> 탄력적IP는 EC2에 연결하지 않으면 비용이 발생하므로 주의
 		
@@ -19,4 +19,4 @@
 	1. Hostname 변경, sudo vim /etc/sysconfig/network && sudo reboot
 		
 		
-*[RDS 생성 및 설정]*
+**[RDS 생성 및 설정]**
