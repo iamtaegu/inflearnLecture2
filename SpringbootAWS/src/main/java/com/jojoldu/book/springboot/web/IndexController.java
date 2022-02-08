@@ -30,6 +30,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
             System.out.println("user is not null userName = " + user.getName());
+            System.out.println("user.toString() >>> "+user.toString());
         } else {
             System.out.println("user is null");
         }
