@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor // 4. fianl 멤버변수만 생성자 생성 & 주입
 public class MemberRepositoryOld {
 
-//    @PersistenceContext
+//    @PersistenceContext - EntityManager 주입
 //    @Autowired // 1. @PersistenceContext를 지원
 
     private final EntityManager em;

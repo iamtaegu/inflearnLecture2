@@ -41,7 +41,8 @@ dependencies {
 	implementation 'com.querydsl:querydsl-apt'
 	//QueryDSL e
 
-	//쿼리파라미터 남기기 위한 외부 라이브러리 로드
+	// 쿼리파라미터 남기기 위한 외부 라이브러리 로드
+    // 개발에서는 사용해도 되지만, 운영 환경에서는 성능 이슈가 있을 수 있음
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'

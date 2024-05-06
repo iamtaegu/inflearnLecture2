@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 // junit 실행할 때 spring하고 같이 실행
 @RunWith(SpringRunner.class)
-// springboot를 띄운 상태에서
+// springboot를 띄운 상태에서 테스트, 없으면 @Autowired 다 실패
 @SpringBootTest
 // 테스트 끝나면 db에 commit이 아닌 rollback 하겠다
 @Transactional

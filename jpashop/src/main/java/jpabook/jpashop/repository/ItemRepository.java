@@ -14,9 +14,9 @@ public class ItemRepository {
     private final EntityManager em;
 
     public void save(Item item) {
-        if (item.getId() == null) {
+        if (item.getId() == null) { //신규
             em.persist(item);
-        } else {
+        } else { //수정
             em.merge(item);
         }
     }

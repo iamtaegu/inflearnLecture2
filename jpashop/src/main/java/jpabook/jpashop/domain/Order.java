@@ -64,6 +64,7 @@ public class Order {
     //==START 생성 메서드==//
     /*
     * 주문 생성 로직
+    * 회원, 주문, 주문아이템 엔티티를 받아서 주문 엔티티를 생성
     * */
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
         Order order = new Order();

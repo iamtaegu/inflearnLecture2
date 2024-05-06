@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-//@Transactional(readOnly = true)E
+//@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ItemService {
 

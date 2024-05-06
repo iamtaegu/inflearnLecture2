@@ -30,7 +30,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    /*public List<Order> findAll(OrderSearch orderSearch) {
+    public List<Order> findAll(OrderSearch orderSearch) {
 
         return em.createQuery("select o from Order o join o.member m" +
                 " where o.status = :status " +
@@ -38,7 +38,7 @@ public class OrderRepository {
                 .setParameter("status", orderSearch.getOrderStatus())
                 .setParameter("name", orderSearch.getMemberName())
                 .getResultList();
-    }*/
+    }
 
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -112,9 +112,9 @@ public class OrderRepository {
     //queryDSL
     //아래 코드는 JPQL과 형태가 유사할 뿐만 아니라
     //자바 코드이기 때문에 컴파일 시점에 오류가 전부 발견됨
-    public List<Order> findAll(OrderSearch orderSearch) {
+/*    public List<Order> findAll(OrderSearch orderSearch) {
         JPAQueryFactory query = new JPAQueryFactory(em);
-        QOrder order = QOrder.order;
+        QOrder order = Order.order;
         QMember member = QMember.member;
 
         return query
@@ -143,5 +143,6 @@ public class OrderRepository {
 
         return QOrder.order.status.eq(statusCond);
     }
+*/
 
 }

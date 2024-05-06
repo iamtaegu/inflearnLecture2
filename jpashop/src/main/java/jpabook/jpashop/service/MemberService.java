@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+/**
+ * 트랜잭션, 영속성 컨텍스트
+ * readOnly=true 영속성 컨텍스트를 플러시 하지 않으므로 성능 향상
+ */
 @Transactional
 //@AllArgsConstructor
 // AllArgsConstructor는 모든 멤버변수를 갖고 생성자를 만들지만
@@ -17,8 +21,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
 
+    // fianl 키워드를 추가하면 컴파일 시점에 memberRepository를 설정하지 않는 오류 체크 가능
     private final MemberRepository memberRepository;
 /*
+ * 필드 주입 대신에 생성자 주입을 사용하자
 
     //생성자가 하나만 있는 경우에는 AUTO INJECTION
     public MemberService(MemberRepository memberRepository) {
