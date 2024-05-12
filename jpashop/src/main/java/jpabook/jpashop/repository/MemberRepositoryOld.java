@@ -27,6 +27,15 @@ public class MemberRepositoryOld {
 
     public void save(Member member){ em.persist(member); }
 
+    public void delete(Long id) {
+        em.remove(findOne(id));
+
+        // Referential integrity constraint violation 발생
+//        em.createQuery("delete from Member m where m.id = :id")
+//                .setParameter("id", id)
+//                .executeUpdate();
+    }
+
     public Member findOne(Long id) { return em.find(Member.class, id); }
 
     public List<Member> findAll() {

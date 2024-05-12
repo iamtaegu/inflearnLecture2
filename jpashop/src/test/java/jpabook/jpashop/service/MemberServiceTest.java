@@ -53,4 +53,35 @@ public class MemberServiceTest {
          //then
          fail("예외가 발생해야 한다.");
       }
+
+    @Test
+    public void 회원_영속성_갱신() {
+        //given
+        Member member = new Member();
+        member.setName("member1");
+
+        Long id = memberService.join(member);
+
+        //when
+        memberService.update(id, "member2");
+
+        //then
+        Assertions.assertEquals("member2", memberService.findOne(id).getName() );
+    }
+
+    @Test
+    public void 회원탈회() {
+        //given
+        Member member = new Member();
+        member.setName("member1");
+
+        Long id = memberService.join(member);
+
+        //when
+        memberRepository.delete(id);
+
+        //then
+        Assertions.assertEquals(member, memberService.findOne(id));
+    }
+
 }
