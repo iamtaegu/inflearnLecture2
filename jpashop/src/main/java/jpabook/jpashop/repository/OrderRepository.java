@@ -151,6 +151,10 @@ public class OrderRepository {
 
     }
 
+    /**
+     * 페이징 한계 돌파
+     *  1. ToOne 관계를 모두 폐치 조인
+     */
     public List<Order> findAllWithMemberDelivery(int offset, int limit) {
         return em.createQuery(
                 "select o from Order o" +
